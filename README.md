@@ -100,9 +100,18 @@ TransitHunter-AI/
 │   ├── verify_model.py                    # Artifact integrity verification
 │   ├── requirements.txt                   # Production backend dependencies
 │   └── README.md                          # Backend detailed technical reference
-├── Frontend/
-│   └── index.html                         # Frontend interface
-├── .gitignore                             # Git ignore rules (datasets, caches, binaries)
+├── frontend1/                             # Modern Mission Control Web Application
+│   ├── src/
+│   │   ├── components/                    # UI cards, status badges, SVG network graph, activity logs
+│   │   ├── pages/                         # Mission Control Dashboard, Exoplanet Hunter, Space Mesh
+│   │   ├── services/api.js                # Live REST integration with FastAPI backend (port 8000)
+│   │   ├── styles/                        # Dark-mode space aesthetics & custom styles
+│   │   ├── App.jsx                        # React Router routes and layout
+│   │   └── main.jsx                       # React 19 application entry point
+│   ├── package.json                       # Vite, React 19, Recharts, Lucide-React
+│   ├── vite.config.js                     # Vite build configuration
+│   └── .env                               # VITE_API_BASE_URL=http://127.0.0.1:8000
+├── .gitignore                             # Git ignore rules (datasets, caches, binaries, node_modules)
 └── README.md                              # Main project documentation (this file)
 ```
 
@@ -302,8 +311,21 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 - Open Swagger Docs: **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)**
 - Health Check: **[http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)**
 
-### 4. Test Prediction with Real Kepler Data
+### 4. Launch the Frontend Console (`frontend1`)
 ```bash
+cd ../frontend1
+npm install
+npm run dev
+```
+- Open Mission Control: **[http://localhost:5173](http://localhost:5173)**
+- **Features in Frontend:**
+  - **Mission Control Dashboard**: Live FastAPI connection monitor, model telemetry, and active mesh health.
+  - **Exoplanet Hunter**: 3,197-point interactive light curve chart, real Kepler sample transit detection (`POST /predict`), and balanced vs high-recall decision threshold toggle.
+  - **Space Mesh Network**: Interactive SVG visualization of Earth, Orbital Relays A & B, Deep Space L1, and Exoplanet Observatory; live Dijkstra shortest-path computation; and simulated link interference with automatic reroute.
+
+### 5. Test Prediction with Real Kepler Data (CLI)
+```bash
+cd ../Backend
 # Generate test payload from exoTest.csv (if dataset is present)
 python scripts/generate_predict_request.py
 

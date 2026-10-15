@@ -33,11 +33,17 @@ logger = logging.getLogger(__name__)
 # CORS — configurable; safe defaults for local Vite/React dev
 # ---------------------------------------------------------------------------
 _ALLOWED_ORIGINS = [
-    "http://localhost:5173",   # Vite dev server default
-    "http://localhost:3000",   # CRA default
+    "*",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
+    "http://localhost:3000",
     "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "http://127.0.0.1:5175",
     "http://127.0.0.1:3000",
 ]
+
 
 
 # ---------------------------------------------------------------------------
@@ -81,9 +87,10 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_ALLOWED_ORIGINS,
     allow_credentials=False,
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type", "Accept"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 
 # ---------------------------------------------------------------------------
@@ -133,8 +140,10 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 # ---------------------------------------------------------------------------
 app.include_router(health.router)
 app.include_router(model.router)
+app.include_router(model.dataset_router)
 app.include_router(predict.router)
 app.include_router(network.router)
+
 
 
 # ---------------------------------------------------------------------------

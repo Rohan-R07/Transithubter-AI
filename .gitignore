@@ -17,3 +17,8 @@ htmlcov/
 # Operating system artifacts
 .DS_Store
 Thumbs.db
+
+# Node dependencies and build artifacts
+node_modules/
+dist/
+dist-ssr/

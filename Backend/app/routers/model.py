@@ -84,3 +84,66 @@ def model_metadata() -> ModelMetadataResponse:
         created_at=meta.get("created_at", "unknown"),
         evaluation_summary=eval_summary,
     )
+
+
+@router.get(
+    "/info",
+    response_model=ModelMetadataResponse,
+    summary="Model information (alias for /metadata)",
+)
+def model_info() -> ModelMetadataResponse:
+    return model_metadata()
+
+
+@router.get(
+    "/metrics",
+    summary="Model evaluation metrics",
+    description="Returns cross-validation and test set evaluation metrics for the Phase 1.5 classifier.",
+)
+def model_metrics():
+    state = get_state()
+    meta_resp = model_metadata()
+    summary = meta_resp.evaluation_summary or {}
+    t08 = summary.get("threshold_0_08", {})
+    return {
+        "model_name": meta_resp.model_name,
+        "phase": meta_resp.phase,
+        "accuracy": t08.get("accuracy", 0.9895),
+        "recall": t08.get("exoplanet_recall", 0.20),
+        "precision": t08.get("exoplanet_precision", 0.3333),
+        "f1_score": t08.get("exoplanet_f1", 0.2500),
+        "decision_threshold": meta_resp.default_threshold,
+        "confusion_matrix": {
+            "true_negatives": 563,
+            "false_positives": 2,
+            "false_negatives": 4,
+            "true_positives": 1,
+        },
+        "evaluation_summary": summary,
+    }
+
+
+dataset_router = APIRouter(prefix="/dataset", tags=["Dataset"])
+
+
+@dataset_router.get(
+    "/info",
+    summary="Kepler dataset summary",
+    description="Returns statistics and class distributions for the NASA Kepler dataset.",
+)
+def dataset_info():
+    return {
+        "dataset_name": "NASA Kepler Exoplanet Labelled Time Series",
+        "feature_count": 3197,
+        "feature_type": "continuous photometric flux",
+        "training_samples": 5087,
+        "test_samples": 570,
+        "total_samples": 5657,
+        "class_distribution": {
+            "non_exoplanet_class_1": 5615,
+            "confirmed_exoplanet_class_2": 42,
+            "positive_rate_pct": 0.74,
+        },
+        "status": "validated (zero missing values, zero infs, zero duplicates)",
+    }
+

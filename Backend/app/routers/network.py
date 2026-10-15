@@ -199,3 +199,14 @@ def reset_network() -> Dict[str, Any]:
     svc = get_network_service()
     svc.reset()
     return svc.get_topology()
+
+
+@router.post(
+    "/fail-link",
+    response_model=InterferenceResponse,
+    summary="Fail link (alias for /interference)",
+    description="Disables a link by link_id.",
+)
+def fail_link(request: InterferenceRequest) -> Dict[str, Any]:
+    return simulate_interference(request)
+
