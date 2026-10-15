@@ -53,16 +53,24 @@ function buildDefaultTopology() {
   };
 }
 
-/**
- * Map backend topology to internal format.
- * Expects backend to return { nodes: [...], edges: [...] }
- * with nodes having id, type/kind, label and edges having id/source/target/cost/weight.
-const SPACE_NODE_POSITIONS = {
+// ============================================================
+// SPACE NODE POSITIONS & DISPLAY MAPPING
+// ============================================================
+export const SPACE_NODE_POSITIONS = {
+  // Backend space topology IDs
   earth_ground_station:  { x: 90,  y: 230, type: 'earth',  label: 'Earth Station' },
   orbital_relay_a:       { x: 260, y: 120, type: 'relay',  label: 'Orbital Relay A' },
   orbital_relay_b:       { x: 260, y: 340, type: 'relay',  label: 'Orbital Relay B' },
   deep_space_relay:      { x: 440, y: 230, type: 'relay',  label: 'Deep Space Relay' },
   exoplanet_observatory: { x: 610, y: 230, type: 'target', label: 'Observatory' },
+
+  // Shorthand and demo node aliases
+  earth:                 { x: 90,  y: 230, type: 'earth',  label: 'Earth' },
+  relay1:                { x: 260, y: 120, type: 'relay',  label: 'Relay-1' },
+  relay2:                { x: 260, y: 340, type: 'relay',  label: 'Relay-2' },
+  relay3:                { x: 440, y: 180, type: 'relay',  label: 'Relay-3' },
+  relay4:                { x: 440, y: 350, type: 'relay',  label: 'Relay-4' },
+  target:                { x: 610, y: 230, type: 'target', label: 'Target' },
 };
 
 /**

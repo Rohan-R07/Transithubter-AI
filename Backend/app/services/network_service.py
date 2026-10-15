@@ -230,7 +230,7 @@ class NetworkService:
     # -----------------------------------------------------------------------
 
     def resolve_node(self, identifier: str) -> NetworkNode:
-        """Resolve a node by its ID or Name (case-insensitive)."""
+        """Resolve a node by its ID or Name (case-insensitive) with aliases."""
         if not identifier or not isinstance(identifier, str):
             raise InvalidRouteRequestError("Node identifier cannot be empty.")
 
@@ -240,12 +240,41 @@ class NetworkService:
             if clean in self._nodes:
                 return self._nodes[clean]
 
-            # 2. Match by normalized name
+            # 2. Aliases for frontend shorthand
+            node_aliases = {
+                "earth": "earth_ground_station",
+                "earth station": "earth_ground_station",
+                "ground station": "earth_ground_station",
+                "relay1": "orbital_relay_a",
+                "relay-1": "orbital_relay_a",
+                "relay_1": "orbital_relay_a",
+                "relay 1": "orbital_relay_a",
+                "relay2": "orbital_relay_b",
+                "relay-2": "orbital_relay_b",
+                "relay_2": "orbital_relay_b",
+                "relay 2": "orbital_relay_b",
+                "relay3": "deep_space_relay",
+                "relay-3": "deep_space_relay",
+                "relay_3": "deep_space_relay",
+                "relay 3": "deep_space_relay",
+                "relay4": "deep_space_relay",
+                "relay-4": "deep_space_relay",
+                "relay_4": "deep_space_relay",
+                "relay 4": "deep_space_relay",
+                "target": "exoplanet_observatory",
+                "observatory": "exoplanet_observatory",
+            }
+            if clean in node_aliases:
+                target_id = node_aliases[clean]
+                if target_id in self._nodes:
+                    return self._nodes[target_id]
+
+            # 3. Match by normalized name
             for node in self._nodes.values():
                 if node.name.strip().lower() == clean:
                     return node
 
-            # 3. Match by fuzzy name without punctuation/underscores
+            # 4. Match by fuzzy name without punctuation/underscores
             norm_clean = clean.replace("_", " ").replace("-", " ")
             for node in self._nodes.values():
                 if node.name.strip().lower() == norm_clean:
@@ -272,6 +301,38 @@ class NetworkService:
                 clean_id = link_id.strip()
                 if clean_id in self._links:
                     return self._links[clean_id]
+
+                # Alias map for demo links
+                link_aliases = {
+                    "e1": "link_earth_relay_a",
+                    "e2": "link_earth_relay_b",
+                    "e3": "link_relay_a_deep_space",
+                    "e4": "link_relay_b_deep_space",
+                    "e5": "link_relay_b_deep_space",
+                    "e6": "link_deep_space_observatory",
+                    "e7": "link_deep_space_observatory",
+                    "e8": "link_relay_a_relay_b",
+                    "e9": "link_deep_space_observatory",
+                }
+                if clean_id.lower() in link_aliases:
+                    aliased = link_aliases[clean_id.lower()]
+                    if aliased in self._links:
+                        return self._links[aliased]
+
+                # Check if formatted like 'nodeA -> nodeB' or 'nodeA-nodeB'
+                for sep in ["->", "→", "--", "-", "_to_"]:
+                    if sep in clean_id:
+                        parts = clean_id.split(sep)
+                        if len(parts) == 2:
+                            try:
+                                src_n = self.resolve_node(parts[0].strip())
+                                dst_n = self.resolve_node(parts[1].strip())
+                                for link in self._links.values():
+                                    if link.connects(src_n.id, dst_n.id):
+                                        return link
+                            except Exception:
+                                pass
+
                 valid_ids = list(self._links.keys())
                 raise LinkNotFoundError(
                     f"Link '{link_id}' not found in network. Available links: {valid_ids}."
