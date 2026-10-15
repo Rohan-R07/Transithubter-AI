@@ -7,6 +7,9 @@ This backend provides:
 - **Phase 1 & 1.5**: ML training pipeline, diagnosis, and cross-validated model improvement
 - **Phase 2**: FastAPI REST API for real-time exoplanet candidate classification
 
+> [!IMPORTANT]
+> 🛰️ **Dataset Source:** **[NASA Kepler Labelled Time Series Dataset (Kaggle)](https://www.kaggle.com/datasets/keplersmachines/kepler-labelled-time-series-data)** — 5,657 light curves, 3,197 flux readings per sample (`exoTrain.csv` and `exoTest.csv`).
+
 ---
 
 ## Directory Architecture

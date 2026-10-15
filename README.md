@@ -8,7 +8,13 @@ TransitHunter AI is an end-to-end space exploration and mission operations platf
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6.1-orange?logo=scikitlearn)](https://scikit-learn.org/)
 [![Pytest](https://img.shields.io/badge/Pytest-37%20Passed-brightgreen?logo=pytest)](https://docs.pytest.org/)
+[![Dataset](https://img.shields.io/badge/Dataset-NASA%20Kepler%20(Kaggle)-20BEFF?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/keplersmachines/kepler-labelled-time-series-data)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+> [!IMPORTANT]
+> 🛰️ **Dataset Source:** **[NASA Kepler Labelled Time Series Dataset (Kaggle)](https://www.kaggle.com/datasets/keplersmachines/kepler-labelled-time-series-data)**
+>
+> Contains **5,657 stellar light curves** (5,087 training / 570 testing) with **3,197 continuous photometric flux observations** per star recorded during the NASA Kepler Space Mission (`exoTrain.csv` and `exoTest.csv`).
 
 ---
 
