@@ -15,6 +15,17 @@ from .training_service import (
     load_and_verify_artifacts,
 )
 
+from .network_service import (
+    NetworkService,
+    NetworkNode,
+    NetworkLink,
+    RouteResult,
+    NodeNotFoundError,
+    LinkNotFoundError,
+    InvalidRouteRequestError,
+    get_network_service,
+)
+
 __all__ = [
     "inspect_dataset",
     "validate_datasets",
@@ -26,4 +37,12 @@ __all__ = [
     "compute_small_sample_uncertainty",
     "save_artifacts",
     "load_and_verify_artifacts",
+    "NetworkService",
+    "NetworkNode",
+    "NetworkLink",
+    "RouteResult",
+    "NodeNotFoundError",
+    "LinkNotFoundError",
+    "InvalidRouteRequestError",
+    "get_network_service",
 ]

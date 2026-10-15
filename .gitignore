@@ -1,6 +1,19 @@
+# Environment variables
 .env
-exoTest.csv
-exoTrain.csv
 
+# Large dataset files
 exoTrain.csv
 exoTest.csv
+
+# Python byte-code and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Operating system artifacts
+.DS_Store
+Thumbs.db
