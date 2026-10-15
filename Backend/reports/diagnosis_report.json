@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-10-15T07:19:30.001423+00:00",
+  "baseline_model_path": "C:\\Users\\Rohan R\\Documents\\PARVRUTTI\\SPACE\\Backend\\models\\exoplanet_random_forest.joblib",
+  "train_samples_count": 5087,
+  "test_samples_count": 570,
+  "train_class_2_count": 37,
+  "test_class_2_count": 5,
+  "train_prob_class_2_distribution": {
+    "class_1_non_exoplanet": {
+      "min": 0.0,
+      "median": 0.0,
+      "max": 0.33,
+      "mean": 0.0093
+    },
+    "class_2_exoplanet": {
+      "min": 1.0,
+      "median": 1.0,
+      "max": 1.0,
+      "mean": 1.0
+    }
+  },
+  "test_prob_class_2_distribution": {
+    "class_1_non_exoplanet": {
+      "min": 0.0,
+      "median": 0.0,
+      "max": 0.11,
+      "mean": 0.0125
+    },
+    "class_2_exoplanet": {
+      "min": 0.03,
+      "median": 0.05,
+      "max": 0.06,
+      "mean": 0.046
+    }
+  },
+  "test_exoplanet_probabilities": [
+    {
+      "test_exoplanet_index": 0,
+      "rank": 1,
+      "predicted_prob_class_2": 0.06,
+      "predicted_prob_class_1": 0.94
+    },
+    {
+      "test_exoplanet_index": 1,
+      "rank": 2,
+      "predicted_prob_class_2": 0.05,
+      "predicted_prob_class_1": 0.95
+    },
+    {
+      "test_exoplanet_index": 2,
+      "rank": 3,
+      "predicted_prob_class_2": 0.06,
+      "predicted_prob_class_1": 0.94
+    },
+    {
+      "test_exoplanet_index": 3,
+      "rank": 4,
+      "predicted_prob_class_2": 0.03,
+      "predicted_prob_class_1": 0.97
+    },
+    {
+      "test_exoplanet_index": 4,
+      "rank": 5,
+      "predicted_prob_class_2": 0.03,
+      "predicted_prob_class_1": 0.97
+    }
+  ],
+  "root_cause_diagnosis": "1. Severe Tree Memorization: With 3,197 raw continuous flux features and unconstrained depth, individual decision trees memorize the specific flux timestamps of the 37 positive training stars, achieving 100% predicted probability on training positives. 2. Lack of Temporal Invariance: Exoplanet transits occur at arbitrary phases/epochs. Decision trees splitting on raw timestamp columns (FLUX.k) cannot generalize to test stars whose transits occur at different times. 3. Tree Vote Dilution: Because positive examples represent only 0.73% of the data, the ensemble's average probability output on unseen test exoplanets peaks at only 0.06 (6%), never crossing the default 0.50 threshold."
+}

@@ -1,0 +1,71 @@
+{
+  "project": "TransitHunter AI",
+  "phase": "Phase 1 - Dataset Validation and ML Model Training",
+  "timestamp": "2026-10-15T06:59:06.799139+00:00",
+  "training_configuration": {
+    "model_type": "RandomForestClassifier",
+    "library": "scikit-learn",
+    "n_estimators": 100,
+    "random_state": 42,
+    "class_weight": "balanced",
+    "n_jobs": -1,
+    "max_depth": null,
+    "n_features_in": 3197,
+    "classes": [
+      1,
+      2
+    ],
+    "training_samples_count": 5087
+  },
+  "metrics": {
+    "accuracy": 0.991228,
+    "precision_macro": 0.495614,
+    "recall_macro": 0.5,
+    "f1_score_macro": 0.497797,
+    "precision_weighted": 0.982533,
+    "recall_weighted": 0.991228,
+    "f1_score_weighted": 0.986861,
+    "per_class_metrics": {
+      "1": {
+        "name": "non_exoplanet",
+        "precision": 0.9912,
+        "recall": 1.0,
+        "f1_score": 0.9956,
+        "support": 565
+      },
+      "2": {
+        "name": "exoplanet",
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "support": 5
+      }
+    },
+    "confusion_matrix": {
+      "matrix": [
+        [
+          565,
+          0
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "labels_order": [
+        1,
+        2
+      ],
+      "true_negative_class_1": 565,
+      "false_positive_class_1_as_2": 0,
+      "false_negative_class_2_as_1": 5,
+      "true_positive_class_2": 0
+    },
+    "test_class_distribution": {
+      "1": 565,
+      "2": 5
+    },
+    "imbalance_explanation": "The test dataset is severely imbalanced (565 non-exoplanets vs 5 confirmed exoplanets, representing ~99.12% vs ~0.88%). A naive majority-class classifier that blindly predicts class 1 for all samples achieves an accuracy of 99.12%, yet completely fails to detect a single exoplanet (0% recall on class 2). Therefore, accuracy alone is misleading; recall and F1-score for the positive minority class (class 2) are the primary indicators of transit detection efficacy.",
+    "domain_interpretation_disclaimer": "TransitHunter AI predicts the classes represented by its training dataset labels (1: non-exoplanet, 2: confirmed exoplanet). A positive prediction indicates statistical similarity to confirmed Kepler transit flux patterns, but does not constitute physical or astronomical proof that an unknown star hosts an exoplanet."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "project": "TransitHunter AI",
+  "phase": "Phase 1 - Dataset Inspection",
+  "timestamp": "2026-10-15T06:59:06.799139+00:00",
+  "train_inspection": {
+    "file_name": "exoTrain.csv",
+    "file_path": "C:\\Users\\Rohan R\\Documents\\PARVRUTTI\\SPACE\\exoTrain.csv",
+    "row_count": 5087,
+    "column_count": 3198,
+    "feature_count": 3197,
+    "dtypes_summary": {
+      "float64": 3197,
+      "int64": 1
+    },
+    "label_info": {
+      "present": true,
+      "column_name": "LABEL",
+      "unique_values": [
+        1,
+        2
+      ],
+      "class_counts": {
+        "1": {
+          "name": "non_exoplanet",
+          "count": 5050,
+          "percentage": 99.2727
+        },
+        "2": {
+          "name": "exoplanet",
+          "count": 37,
+          "percentage": 0.7273
+        }
+      },
+      "class_percentages": {
+        "1": 99.2727,
+        "2": 0.7273
+      }
+    },
+    "missing_values_count": 0,
+    "non_finite_values_count": 0,
+    "duplicate_rows_count": 0,
+    "all_feature_columns_numeric": true,
+    "feature_names_head": [
+      "FLUX.1",
+      "FLUX.2",
+      "FLUX.3",
+      "FLUX.4",
+      "FLUX.5"
+    ],
+    "feature_names_tail": [
+      "FLUX.3193",
+      "FLUX.3194",
+      "FLUX.3195",
+      "FLUX.3196",
+      "FLUX.3197"
+    ]
+  },
+  "test_inspection": {
+    "file_name": "exoTest.csv",
+    "file_path": "C:\\Users\\Rohan R\\Documents\\PARVRUTTI\\SPACE\\exoTest.csv",
+    "row_count": 570,
+    "column_count": 3198,
+    "feature_count": 3197,
+    "dtypes_summary": {
+      "float64": 3197,
+      "int64": 1
+    },
+    "label_info": {
+      "present": true,
+      "column_name": "LABEL",
+      "unique_values": [
+        1,
+        2
+      ],
+      "class_counts": {
+        "1": {
+          "name": "non_exoplanet",
+          "count": 565,
+          "percentage": 99.1228
+        },
+        "2": {
+          "name": "exoplanet",
+          "count": 5,
+          "percentage": 0.8772
+        }
+      },
+      "class_percentages": {
+        "1": 99.1228,
+        "2": 0.8772
+      }
+    },
+    "missing_values_count": 0,
+    "non_finite_values_count": 0,
+    "duplicate_rows_count": 0,
+    "all_feature_columns_numeric": true,
+    "feature_names_head": [
+      "FLUX.1",
+      "FLUX.2",
+      "FLUX.3",
+      "FLUX.4",
+      "FLUX.5"
+    ],
+    "feature_names_tail": [
+      "FLUX.3193",
+      "FLUX.3194",
+      "FLUX.3195",
+      "FLUX.3196",
+      "FLUX.3197"
+    ]
+  },
+  "validation_status": "VALID",
+  "schema_compatibility": true
+}
